@@ -29,6 +29,7 @@ class UserManager(models.Manager):
 class User(models.Model):
     first_name= models.CharField(max_length=50)
     last_name= models.CharField(max_length=60)
+    balance = models.IntegerField(default = 100000)
     email= models.EmailField(max_length=50)
     password= models.CharField(max_length=60)
     created_at = models.DateTimeField(auto_now_add=True)
