@@ -12,14 +12,14 @@
 <body>
     <div id="container">
         <header>
-        <h1>TSLA</h1>
+        <h1>{{ curr_stock.symb }}</h1>
         <div id="account_links">
             <a href="/">Home</a>
             <a href="/user_account">My Account</a>
             <a href="/login/logout">Logout</a>
         </div>
         </header>
-        <h3>Telsa</h3>
+        <h3>{{ curr_stock.comp_name }}</h3>
         <div class="individual_table">
             <h2>Active Trades</h2>
             <table>
@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Filler</td>
+                        <td>{{ curr_stock.curr_price }}</td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -57,8 +57,22 @@
             </table>
         </div>
         <div id="buy_sell">
-            <p>Quantity: <input type="text">  <button><a href="stock_page">Buy</a></button></p>
-            <p>Quantity: <input type="text">  <button><a href="stock_page">Sell</a></button></p>
+            <form action="/buy" method='post'>
+                {% csrf_token%}
+
+                <p>Quantity: <input type="text" name='quantity' id='quantity'>  <button type='sumbit'>Buy</button></p>
+            </form>
+
+            <form action="/sell" method='post'>
+                {% csrf_token%}
+
+                <p>Quantity: <input type="text" name='quantity' id='quantity'>  <button type='sumbit'>Sell</button></p>
+            </form>
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {%endfor%}
+            {%endif%}
             <button>Follow</button>
         </div>
     </div>

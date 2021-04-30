@@ -1,5 +1,6 @@
 from django.db import models
 import re
+import decimal
 
 class UserManager(models.Manager):
     def basic_validator(self, postData):
@@ -29,9 +30,14 @@ class UserManager(models.Manager):
 class User(models.Model):
     first_name= models.CharField(max_length=50)
     last_name= models.CharField(max_length=60)
-    balance = models.IntegerField(default = 100000)
+
     email= models.EmailField(max_length=50)
     password= models.CharField(max_length=60)
+    
+    balance = models.DecimalField(max_digits = 15, decimal_places = 2, default = 100000.00)
+
+    objects = UserManager()
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    objects = UserManager()
+    

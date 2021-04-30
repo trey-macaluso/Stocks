@@ -1,5 +1,6 @@
 from django.db import models
 from login_app.models import User
+import decimal
 
 class StockManager(models.Manager):
     # insert validator info
@@ -8,6 +9,7 @@ class StockManager(models.Manager):
 class Stock(models.Model):
     symb = models.CharField(max_length = 5)
     comp_name = models.CharField(max_length = 64)
+    curr_price = models.DecimalField(max_digits = 15, decimal_places = 2)
 
     # users following
     users = models.ManyToManyField(User, related_name='stocks')
